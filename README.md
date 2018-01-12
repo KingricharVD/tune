@@ -10,24 +10,45 @@ And one more thing… We will announce all progress not only roadmap but also we
 
        
 Name of Coin : TUNE
+
 Tiker : TUN
+
 PoW Algorithem : neoscrypt
+
 Block Time : 90 sec (960 Block per day)
+
 Masternode Reward : 50% ( 5 per Block, From 3840 Block)
+
 Profit Share : 30% of Weekly Income from TUNE fund will be distributed to Registered Masternode Holder
 
 [POW Reward]
-  1) 1 per Blcok (~ 3k Block, for slow start, beta test)
-  2) 10 per Block (From 3k Block ~)
-  3) 5 per Block after Masternodes Run.
+ - 1 per Blcok (~ 3k Block, for slow start, beta test)
+ - 10 per Block (From 3k Block ~)
+ - 5 per Block after Masternodes Run.
 [Masternode Price]
-  1) 1000 TUN ( 0 ~ 10,000 Block)
-  2) 1500 TUN ( 10,001 ~ 20,000 Block)
-  3) Every 10k Block, Masternode Price will rise 500 TUN
+ - 1000 TUN ( 0 ~ 10,000 Block)
+ - 1500 TUN ( 10,001 ~ 20,000 Block)
+ - Every 10k Block, Masternode Price will rise 500 TUN
 [Premine]
-  Total 300,000 (about 30 days reward of POW)
-  1) 5,000 : to the dev team. masternode test and incentive
-  2) 295,000 : to the TUNE fund
+ - Total 300,000 (about 30 days reward of POW)
+ - 5,000 : to the dev team. masternode test and incentive
+ - 5,000 : to old TUNE holders
+ - 290,000 : to the TUNE fund
+
+
+----------------------------------------
+Restart Guide
+----------------------------------------
+
+Unfortunately, Some technical problem occur in 1st start up.
+We decided restart the full chain from the bigining.
+
+- If you have any old-TUNE in your wallet, take a screen-shot.
+- delete your daemon, qt, tunecore folder (.tunecore in linux)
+  (You can find tunecore folder at C:\Users\"your windows id"\AppData\Roaming\TuneCore)
+- addnode in your tunecore/tune.conf
+  addnode = tunecrypto.com
+- download new wallet, or compile, and run
 
 ----------------------------------------
 Compiling Guide
@@ -98,4 +119,3 @@ echo "sudo make -j4" >> run.sh
 sudo chmod +x run.sh
 
 sudo ./run.sh > log
-
