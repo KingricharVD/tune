@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/tune_bg.qm</file>
+        <file alias="de">locale/tune_de.qm</file>
+        <file alias="en">locale/tune_en.qm</file>
+        <file alias="es">locale/tune_es.qm</file>
+        <file alias="fi">locale/tune_fi.qm</file>
+        <file alias="fr">locale/tune_fr.qm</file>
+        <file alias="it">locale/tune_it.qm</file>
+        <file alias="ja">locale/tune_ja.qm</file>
+        <file alias="pl">locale/tune_pl.qm</file>
+        <file alias="pt">locale/tune_pt.qm</file>
+        <file alias="ru">locale/tune_ru.qm</file>
+        <file alias="sk">locale/tune_sk.qm</file>
+        <file alias="sv">locale/tune_sv.qm</file>
+        <file alias="vi">locale/tune_vi.qm</file>
+        <file alias="zh_CN">locale/tune_zh_CN.qm</file>
+        <file alias="zh_TW">locale/tune_zh_TW.qm</file>
+    </qresource>
+</RCC>

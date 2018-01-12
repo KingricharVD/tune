@@ -1,0 +1,11 @@
+[Protocol]
+exec=tune-qt '%u'
+protocol=tune
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

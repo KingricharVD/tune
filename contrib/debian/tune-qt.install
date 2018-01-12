@@ -1,0 +1,6 @@
+usr/local/bin/tune-qt usr/bin
+share/pixmaps/tune32.xpm usr/share/pixmaps
+share/pixmaps/tune16.xpm usr/share/pixmaps
+share/pixmaps/tune128.png usr/share/pixmaps
+debian/tune-qt.desktop usr/share/applications
+debian/tune-qt.protocol usr/share/kde4/services/
