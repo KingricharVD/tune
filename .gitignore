@@ -88,3 +88,4 @@ qa/pull-tester/tests-config.sh
 tune-cli
 tuned
 tune-qt
+/.vs
