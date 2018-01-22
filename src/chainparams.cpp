@@ -126,7 +126,7 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        // vSeeds.push_back(CDNSSeedData("94.176.239.233:20725", "94.176.239.233:10725"));
+        vSeeds.push_back(CDNSSeedData("tunecrypto.com:20725", "tunecrypto.co:20725"));
 
         // Tune addresses start with 'T'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,65);
