@@ -2261,7 +2261,7 @@ std::string CDarksendPool::GetMessageByID(PoolMessage nMessageID)
 
 bool CDarkSendSigner::IsVinAssociatedWithPubkey(const CTxIn& txin, const CPubKey& pubkey)
 {
-        int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+        int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 11000) * 200 ;
     CScript payee;
     payee = GetScriptForDestination(pubkey.GetID());
 

@@ -2086,7 +2086,7 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
     {
         LOCK2(cs_main, cs_wallet);
 	
-	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;	
+	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 11000) * 200 ;	
 //	int MASTERNODE_PRICE = 1200;
 
 	fprintf(stdout,"%s", "\n MASTERNODE PRICE is.. \n");
@@ -2561,7 +2561,7 @@ struct CompareByAmount
 bool CWallet::SelectCoinsGrouppedByAddresses(std::vector<CompactTallyItem>& vecTallyRet, bool fSkipDenominated, bool fAnonymizable) const
 {
     LOCK2(cs_main, cs_wallet);
-        int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+        int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 11000) * 200 ;
     isminefilter filter = ISMINE_SPENDABLE;
 
     // try to use cache
@@ -2648,7 +2648,7 @@ bool CWallet::SelectCoinsGrouppedByAddresses(std::vector<CompactTallyItem>& vecT
 bool CWallet::SelectCoinsDark(CAmount nValueMin, CAmount nValueMax, std::vector<CTxIn>& vecTxInRet, CAmount& nValueRet, int nPrivateSendRoundsMin, int nPrivateSendRoundsMax) const
 {
 	
-	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 11000) * 200 ;
 
     CCoinControl *coinControl=NULL;
 

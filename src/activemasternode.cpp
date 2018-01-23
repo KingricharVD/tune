@@ -211,9 +211,9 @@ void CActiveMasternode::ManageStateInitial()
         return;
     }
 
-    int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+    int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 11000) * 200 ;
     if(pwalletMain->GetBalance() < MASTERNODE_PRICE * COIN) {
-        LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < 1000 TUN\n", GetStateString());
+        LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < %MASTERNODE_PRICE TUN\n", GetStateString());
         return;
     }
 
@@ -238,6 +238,7 @@ void CActiveMasternode::ManageStateRemote()
     masternode_info_t infoMn = mnodeman.GetMasternodeInfo(pubKeyMasternode);
     if(infoMn.fInfoValid) {
         if(infoMn.nProtocolVersion != PROTOCOL_VERSION) {
+			// this will deactivate masternode when it has the wrong version of protocol_version that doesn't match the rest of chain
             nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
             strNotCapableReason = "Invalid protocol version";
             LogPrintf("CActiveMasternode::ManageStateRemote -- %s: %s\n", GetStateString(), strNotCapableReason);
@@ -245,6 +246,8 @@ void CActiveMasternode::ManageStateRemote()
         }
         if(service != infoMn.addr) {
             nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
+			// this happens if someone the ip is fishy
+
             strNotCapableReason = "Broadcasted IP doesn't match our external address. Make sure you issued a new broadcast if IP of this masternode changed recently.";
             LogPrintf("CActiveMasternode::ManageStateRemote -- %s: %s\n", GetStateString(), strNotCapableReason);
             return;
