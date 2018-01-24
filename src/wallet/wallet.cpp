@@ -2087,11 +2087,7 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
         LOCK2(cs_main, cs_wallet);
 	
 	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;	
-//	int MASTERNODE_PRICE = 1200;
 
-	fprintf(stdout,"%s", "\n MASTERNODE PRICE is.. \n");
-        fprintf(stdout,"%d", MASTERNODE_PRICE );
-	fprintf(stdout,"%s", "\n FIND OUT MASTERNODE OUTPUTS.. \n");
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const uint256& wtxid = it->first;
