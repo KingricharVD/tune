@@ -2,11 +2,11 @@ Tune Core
 ===============================
 
 TUNE is experimental cryptocurrency for incubating and investing new cryptocurrency.
-TUNE have three main features…
+TUNE have three main features
 1st : Variable Masternode Price
 2nd : Profit Sharing (Weekly, Bitcoin base)
 3rd : Transparent Funding Operation (All address will be opend (include BTC wallet))
-And one more thing… We will announce all progress not only roadmap but also weekly plan and result.
+And one more thing. We will announce all progress not only roadmap but also weekly plan and result.
 
        
 Name of Coin : TUNE
