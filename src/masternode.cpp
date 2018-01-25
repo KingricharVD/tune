@@ -626,7 +626,9 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
             return false;
         }
 	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
-        if(coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE * COIN) {
+        int MASTERNODE_PRICE1 = 1000 ;
+
+        if(coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE1 * COIN ) {
             LogPrint("masternode", "CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO should have 1000 TUN, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }
