@@ -22,7 +22,7 @@ Masternode Reward : 50% ( 5 per Block, From 3840 Block)
 Profit Share : 30% of Weekly Income from TUNE fund will be distributed to Registered Masternode Holder
 
 [POW Reward]
- - 1 per Blcok (~ 3k Block, for slow start, beta test)
+ - 1 per Block (~ 3k Block, for slow start, beta test)
  - 10 per Block (From 3k Block ~)
  - 5 per Block after Masternodes Run.
 [Masternode Price]
@@ -40,8 +40,8 @@ Profit Share : 30% of Weekly Income from TUNE fund will be distributed to Regist
 Restart Guide
 ----------------------------------------
 
-Unfortunately, Some technical problem occur in 1st start up.
-We decided restart the full chain from the bigining.
+Unfortunately, Some technical problem occured in the 1st start up.
+We decided to restart the full chain from the beginning.
 
 - If you have any old-TUNE in your wallet, take a screen-shot.
 - delete your daemon, qt, tunecore folder (.tunecore in linux)
@@ -54,11 +54,11 @@ We decided restart the full chain from the bigining.
 Compiling Guide
 ----------------------------------------
 
-1) Basic requirement (on linux)
+1) Basic environment requirements (on linux)
 
 sudo apt-get install -y curl g++ git-core pkg-config autoconf libtool automake faketime bsdmainutils mingw-w64 g++-mingw-w64 nsis zip ca-certificates python 
 
-2) For linux (on linux)
+2) For automatic setup (on linux)
 
 Just copy below and paste it your linux terminal.
 
