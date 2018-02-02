@@ -793,3 +793,4 @@ UniValue masternodebroadcast(const UniValue& params, bool fHelp)
 
     return NullUniValue;
 }
+

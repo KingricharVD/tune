@@ -197,7 +197,7 @@ public:
         consensus.BIP34Hash = uint256S("0x0000000023b3a96d3484e5abb3755c413e7d41500f8e2a5c3f0dd01299cd8ef8"); // FIX
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
         consensus.nPowTargetTimespan = 60 * 60; // Tune: 1 hour, 24 blocks
-        consensus.nPowTargetSpacing = 2.5 * 60; // Tune: 150 seconds
+        consensus.nPowTargetSpacing = 0.5 * 60; // Tune: 150 seconds
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
@@ -227,6 +227,10 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
+        vSeeds.push_back(CDNSSeedData("tseed1.tunecrypto.com", "tseed1.tunecrypto.com"));
+        vSeeds.push_back(CDNSSeedData("tseed2.tunecrypto.com", "tseed2.tunecrypto.com"));
+
+
 
         // Testnet Tune addresses start with 'n'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,112);
