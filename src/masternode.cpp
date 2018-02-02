@@ -14,6 +14,7 @@
 #include "masternodeman.h"
 #include "util.h"
 #include "txmempool.h"
+#include "rpcserver.h"
 
 #include <boost/lexical_cast.hpp>
 
@@ -409,7 +410,7 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
     CKey keyCollateralAddressNew;
     CPubKey pubKeyMasternodeNew;
     CKey keyMasternodeNew;
-    int nOutputIndex = atoi(strOutputIndex.c_str());
+	 int nOutputIndex = atoi(strOutputIndex.c_str());
     //need correct blocks to send ping
     if(!fOffline && !masternodeSync.IsBlockchainSynced()) {
         strErrorRet = "Sync in progress. Must wait until sync is complete to start Masternode";
@@ -423,8 +424,8 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
         return false;
     }
 
-    if(!pwalletMain->GetMasternodeVinAndKeys(txin, pubKeyCollateralAddressNew, keyCollateralAddressNew, strTxHash, nOutputIndex)) {
-        strErrorRet = strprintf("Could not allocate txin %s:%s for masternode %s", strTxHash, nOutputIndex, strService);
+    if(!pwalletMain->GetMasternodeVinAndKeys(txin, pubKeyCollateralAddressNew, keyCollateralAddressNew, strTxHash, strOutputIndex)) {
+        strErrorRet = strprintf("Could not allocate txin %s:%s for masternode %s", strTxHash, strOutputIndex, strService);
         LogPrintf("CMasternodeBroadcast::Create -- %s\n", strErrorRet);
         return false;
     }
@@ -442,14 +443,7 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
         LogPrintf("CMasternodeBroadcast::Create -- %s\n", strErrorRet);
         return false;
     }
-
-    return Create(txin, CService(strService), keyCollateralAddressNew, pubKeyCollateralAddressNew, keyMasternodeNew, pubKeyMasternodeNew, strErrorRet, mnbRet);
-}
-
-
-bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew, CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string &strErrorRet, CMasternodeBroadcast &mnbRet)
-{
-//#2
+//#3
     uint256 xhash=txin.prevout.hash;
     CCoins coins;
         LOCK(mempool.cs);
@@ -460,13 +454,29 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
     LogPrintf("CMasternodeBroadcast::coins height :  %d\n", coins.nHeight);
     LogPrintf("CMasternodeBroadcast::Create success-- %s\n", txin.ToString());
 
-        int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 1000) * 500 ;
+        int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
         int MASTERNODE_PRICE1 = 1000 ;
+        int MASTERNODE_PRICE2 = 1500 ;
 
-// ValueFromAmount(coins.vout[n].nValue)
-//        if(coins.vout.nValue !=MASTERNODE_PRICE * COIN && coins.vout.nValue !=MASTERNODE_PRICE1 * COIN ) {
-//            return false;
-//        }
+	LogPrintf("CMasternodeBroadcast::coins nValue of index :  %d\n", coins.vout[nOutputIndex].nValue/COIN);
+	int cValue =  coins.vout[nOutputIndex].nValue/COIN;
+	if (coins.nHeight > 10000 && cValue < MASTERNODE_PRICE2){
+	        strErrorRet = strprintf("Your Masternode output has %d TUNE, and it was made at Block Height %d. You need %d TUNE to start masternode now.", cValue, coins.nHeight, MASTERNODE_PRICE);
+		return false;
+	}
+        if (coins.nHeight > 20000 && cValue < MASTERNODE_PRICE){
+                strErrorRet = strprintf("Your Masternode output has %d TUNE, and it was made at Block Height %d. You need %d TUNE to start masternode now.", cValue, c$
+                return false;
+        }
+
+    return Create(txin, CService(strService), keyCollateralAddressNew, pubKeyCollateralAddressNew, keyMasternodeNew, pubKeyMasternodeNew, strErrorRet, mnbRet);
+}
+
+
+bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew, CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string &strErrorRet, CMasternodeBroadcast &mnbRet)
+{
+//	if(coins.nHeight > 1000 && coins.vout[0].nValue = MASTERNODE_PRICE1) return false;
+
     // wait for reindex and/or import to finish
     if (fImporting || fReindex) return false;
 
@@ -648,7 +658,7 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
             LogPrint("masternode", "CMasternodeBroadcast::CheckOutpoint -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }
-	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 1000) * 500 ;
+	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
         int MASTERNODE_PRICE1 = 1000 ;
 
         if(coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE1 * COIN ) {

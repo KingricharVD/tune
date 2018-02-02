@@ -1,3 +1,4 @@
+//
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
@@ -2086,7 +2087,10 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
     {
         LOCK2(cs_main, cs_wallet);
 	
-	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;	
+	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+        int MASTERNODE_PRICE1 = 1000 ;
+	int MASTERNODE_PRICE2 = 1500 ;
+	
 
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
@@ -2123,7 +2127,8 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
                     found = !IsDenominatedAmount(pcoin->vout[i].nValue);
                     if(found && fMasterNode) found = pcoin->vout[i].nValue != MASTERNODE_PRICE * COIN; // do not use Hot MN funds
                 } else if(nCoinType == ONLY_1000) {
-                    found = pcoin->vout[i].nValue == MASTERNODE_PRICE * COIN;
+                      found = (pcoin->vout[i].nValue == MASTERNODE_PRICE * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE1 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE2 * COIN);
+
                 } else if(nCoinType == ONLY_PRIVATESEND_COLLATERAL) {
                     found = IsCollateralAmount(pcoin->vout[i].nValue);
                 } else {

@@ -632,7 +632,6 @@ UniValue gettxout(const UniValue& params, bool fHelp)
     LOCK(cs_main);
 
     UniValue ret(UniValue::VOBJ);
-
     std::string strHash = params[0].get_str();
     uint256 hash(uint256S(strHash));
     int n = params[1].get_int();
@@ -641,12 +640,23 @@ UniValue gettxout(const UniValue& params, bool fHelp)
         fMempool = params[2].get_bool();
 
     CCoins coins;
+//#1
     if (fMempool) {
         LOCK(mempool.cs);
+
         CCoinsViewMemPool view(pcoinsTip, mempool);
+
+fprintf(stdout,"%s", "CCoins.nHeight is \n");
+fprintf(stdout,"%i", coins.nHeight );
+fprintf(stdout,"%s", " checked#1! \n");
         if (!view.GetCoins(hash, coins))
             return NullUniValue;
         mempool.pruneSpent(hash, coins); // TODO: this should be done by the CCoinsViewMemPool
+fprintf(stdout,"%s", "CCoins.nHeight is \n");
+fprintf(stdout,"%i", coins.nHeight );
+fprintf(stdout,"%s", " checked#3! \n");
+ret.push_back(Pair("value", ValueFromAmount(coins.vout[n].nValue)));
+
     } else {
         if (!pcoinsTip->GetCoins(hash, coins))
             return NullUniValue;
@@ -657,17 +667,17 @@ UniValue gettxout(const UniValue& params, bool fHelp)
     BlockMap::iterator it = mapBlockIndex.find(pcoinsTip->GetBestBlock());
     CBlockIndex *pindex = it->second;
     ret.push_back(Pair("bestblock", pindex->GetBlockHash().GetHex()));
+
     if ((unsigned int)coins.nHeight == MEMPOOL_HEIGHT)
         ret.push_back(Pair("confirmations", 0));
     else
         ret.push_back(Pair("confirmations", pindex->nHeight - coins.nHeight + 1));
-    ret.push_back(Pair("value", ValueFromAmount(coins.vout[n].nValue)));
+//    ret.push_back(Pair("value", ValueFromAmount(coins.vout[n].nValue)));
     UniValue o(UniValue::VOBJ);
     ScriptPubKeyToJSON(coins.vout[n].scriptPubKey, o, true);
     ret.push_back(Pair("scriptPubKey", o));
     ret.push_back(Pair("version", coins.nVersion));
     ret.push_back(Pair("coinbase", coins.fCoinBase));
-
     return ret;
 }
 
