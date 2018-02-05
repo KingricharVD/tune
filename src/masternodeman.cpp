@@ -821,7 +821,7 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
             // use announced Masternode as a peer
             addrman.Add(CAddress(mnb.addr), pfrom->addr, 2*60*60);
         } else if(nDos > 0) {
-            Misbehaving(pfrom->GetId(), nDos);
+//            Misbehaving(pfrom->GetId(), nDos);
         }
 
         if(fMasternodesAdded) {
@@ -857,7 +857,7 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
 
         if(nDos > 0) {
             // if anything significant failed, mark that node
-            Misbehaving(pfrom->GetId(), nDos);
+//            Misbehaving(pfrom->GetId(), nDos);
         } else if(pmn != NULL) {
             // nothing significant failed, mn is a known one too
             return;
@@ -889,7 +889,7 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
                 if (i != mAskedUsForMasternodeList.end()){
                     int64_t t = (*i).second;
                     if (GetTime() < t) {
-                        Misbehaving(pfrom->GetId(), 34);
+//                        Misbehaving(pfrom->GetId(), 34);
                         LogPrintf("DSEG -- peer already asked me for the list, peer=%d\n", pfrom->id);
                         return;
                     }
@@ -1123,7 +1123,7 @@ void CMasternodeMan::SendVerifyReply(CNode* pnode, CMasternodeVerification& mnv)
     if(netfulfilledman.HasFulfilledRequest(pnode->addr, strprintf("%s", NetMsgType::MNVERIFY)+"-reply")) {
         // peer should not ask us that often
         LogPrintf("MasternodeMan::SendVerifyReply -- ERROR: peer already asked me recently, peer=%d\n", pnode->id);
-        Misbehaving(pnode->id, 20);
+//        Misbehaving(pnode->id, 20);
         return;
     }
 
@@ -1158,7 +1158,7 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
     // did we even ask for it? if that's the case we should have matching fulfilled request
     if(!netfulfilledman.HasFulfilledRequest(pnode->addr, strprintf("%s", NetMsgType::MNVERIFY)+"-request")) {
         LogPrintf("CMasternodeMan::ProcessVerifyReply -- ERROR: we didn't ask for verification of %s, peer=%d\n", pnode->addr.ToString(), pnode->id);
-        Misbehaving(pnode->id, 20);
+//        Misbehaving(pnode->id, 20);
         return;
     }
 
@@ -1166,7 +1166,7 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
     if(mWeAskedForVerification[pnode->addr].nonce != mnv.nonce) {
         LogPrintf("CMasternodeMan::ProcessVerifyReply -- ERROR: wrong nounce: requested=%d, received=%d, peer=%d\n",
                     mWeAskedForVerification[pnode->addr].nonce, mnv.nonce, pnode->id);
-        Misbehaving(pnode->id, 20);
+//        Misbehaving(pnode->id, 20);
         return;
     }
 
@@ -1174,7 +1174,7 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
     if(mWeAskedForVerification[pnode->addr].nBlockHeight != mnv.nBlockHeight) {
         LogPrintf("CMasternodeMan::ProcessVerifyReply -- ERROR: wrong nBlockHeight: requested=%d, received=%d, peer=%d\n",
                     mWeAskedForVerification[pnode->addr].nBlockHeight, mnv.nBlockHeight, pnode->id);
-        Misbehaving(pnode->id, 20);
+//        Misbehaving(pnode->id, 20);
         return;
     }
 
@@ -1188,7 +1188,7 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
     // we already verified this address, why node is spamming?
     if(netfulfilledman.HasFulfilledRequest(pnode->addr, strprintf("%s", NetMsgType::MNVERIFY)+"-done")) {
         LogPrintf("CMasternodeMan::ProcessVerifyReply -- ERROR: already verified %s recently\n", pnode->addr.ToString());
-        Misbehaving(pnode->id, 20);
+//        Misbehaving(pnode->id, 20);
         return;
     }
 
@@ -1244,7 +1244,7 @@ void CMasternodeMan::ProcessVerifyReply(CNode* pnode, CMasternodeVerification& m
             // this should never be the case normally,
             // only if someone is trying to game the system in some way or smth like that
             LogPrintf("CMasternodeMan::ProcessVerifyReply -- ERROR: no real masternode found for addr %s\n", pnode->addr.ToString());
-            Misbehaving(pnode->id, 20);
+//            Misbehaving(pnode->id, 20);
             return;
         }
         LogPrintf("CMasternodeMan::ProcessVerifyReply -- verified real masternode %s for addr %s\n",
@@ -1282,7 +1282,7 @@ void CMasternodeMan::ProcessVerifyBroadcast(CNode* pnode, const CMasternodeVerif
                     mnv.vin1.prevout.ToStringShort(), pnode->id);
         // that was NOT a good idea to cheat and verify itself,
         // ban the node we received such message from
-        Misbehaving(pnode->id, 100);
+//        Misbehaving(pnode->id, 100);
         return;
     }
 
