@@ -2092,6 +2092,9 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
 	int MASTERNODE_PRICE2 = 1500 ;
         int MASTERNODE_PRICE3 = 2000 ;
         int MASTERNODE_PRICE4 = 2500 ;
+        int MASTERNODE_PRICE5 = 3000 ;
+        int MASTERNODE_PRICE6 = 3500 ;
+
 
 	
 
@@ -2130,7 +2133,7 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
                     found = !IsDenominatedAmount(pcoin->vout[i].nValue);
                     if(found && fMasterNode) found = pcoin->vout[i].nValue != MASTERNODE_PRICE * COIN; // do not use Hot MN funds
                 } else if(nCoinType == ONLY_1000) {
-                    found = (pcoin->vout[i].nValue == MASTERNODE_PRICE * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE1 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE2 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE3 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE4 * COIN);
+                    found = (pcoin->vout[i].nValue == MASTERNODE_PRICE * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE1 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE2 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE3 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE4 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE5 * COIN) || (pcoin->vout[i].nValue == MASTERNODE_PRICE6 * COIN);
 
                 } else if(nCoinType == ONLY_PRIVATESEND_COLLATERAL) {
                     found = IsCollateralAmount(pcoin->vout[i].nValue);

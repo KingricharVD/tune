@@ -2266,6 +2266,8 @@ bool CDarkSendSigner::IsVinAssociatedWithPubkey(const CTxIn& txin, const CPubKey
         int MASTERNODE_PRICE2 = 1500 ;
         int MASTERNODE_PRICE3 = 2000 ;
         int MASTERNODE_PRICE4 = 2500 ;
+        int MASTERNODE_PRICE5 = 3000 ;
+        int MASTERNODE_PRICE6 = 3500 ;
 
     CScript payee;
     payee = GetScriptForDestination(pubkey.GetID());
@@ -2274,7 +2276,7 @@ bool CDarkSendSigner::IsVinAssociatedWithPubkey(const CTxIn& txin, const CPubKey
     uint256 hash;
     if(GetTransaction(txin.prevout.hash, tx, Params().GetConsensus(), hash, true)) {
         BOOST_FOREACH(CTxOut out, tx.vout)
-            if((out.nValue == MASTERNODE_PRICE * COIN || out.nValue == MASTERNODE_PRICE1 * COIN || out.nValue == MASTERNODE_PRICE2 * COIN || out.nValue == MASTERNODE_PRICE3 * COIN || out.nValue == MASTERNODE_PRICE4 * COIN) && out.scriptPubKey == payee) return true;
+            if((out.nValue == MASTERNODE_PRICE * COIN || out.nValue == MASTERNODE_PRICE1 * COIN || out.nValue == MASTERNODE_PRICE2 * COIN || out.nValue == MASTERNODE_PRICE3 * COIN || out.nValue == MASTERNODE_PRICE4 * COIN || out.nValue == MASTERNODE_PRICE5 * COIN || out.nValue == MASTERNODE_PRICE6 * COIN)  && out.scriptPubKey == payee) return true;
     }
 
     return false;
