@@ -2,6 +2,5 @@ SDKs/
 work/
 built/
 sources/
-config.site
 mips*
 arm*
