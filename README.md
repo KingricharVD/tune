@@ -58,64 +58,17 @@ Compiling Guide
 
 sudo apt-get install -y curl g++ git-core pkg-config autoconf libtool automake faketime bsdmainutils mingw-w64 g++-mingw-w64 nsis zip ca-certificates python 
 
+you need to login by id that have authority to control /root/ directory.
+
 2) For automatic setup (on linux)
 
-Just copy below and paste it your linux terminal.
-
-echo "cd depends" > run.sh
-
-echo "sudo make -j4 HOST=x86_64-pc-linux-gnu" >> run.sh
-
-echo "cd .." >> run.sh
-
-echo "sudo ./autogen.sh" >> run.sh
-
-echo "sudo ./configure --prefix=\`pwd\`/depends/x86_64-pc-linux-gnu" >> run.sh
-
-echo "sudo make -j4" >> run.sh
-
-sudo chmod +x run.sh
-
-sudo ./run.sh > log
-
+Run compile-l.sh
 
 3) For windows 32bit (on linux)
 
-Just copy below and paste it your linux terminal.
-
-echo "cd depends" > run.sh
-
-echo "sudo make -j4 HOST=i686-w64-mingw32" >> run.sh
-
-echo "cd .." >> run.sh
-
-echo "sudo ./autogen.sh" >> run.sh
-
-echo "sudo ./configure --prefix=\`pwd\`/depends/i686-w64-mingw32" >> run.sh
-
-echo "sudo make -j4" >> run.sh
-
-sudo chmod +x run.sh
-
-sudo ./run.sh > log
-
+Run compile-w32.sh
 
 4) For windows 64bit (on linux)
 
-Just copy below and paste it your linux terminal.
+Run compile-w64.sh
 
-echo "cd depends" > run.sh
-
-echo "sudo make -j4 HOST=x86_64-w64-mingw32" >> run.sh
-
-echo "cd .." >> run.sh
-
-echo "sudo ./autogen.sh" >> run.sh
-
-echo "sudo ./configure --prefix=\`pwd\`/depends/x86_64-w64-mingw32" >> run.sh
-
-echo "sudo make -j4" >> run.sh
-
-sudo chmod +x run.sh
-
-sudo ./run.sh > log
