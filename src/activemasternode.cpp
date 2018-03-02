@@ -212,6 +212,7 @@ void CActiveMasternode::ManageStateInitial()
     }
 
     int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+    if (MASTERNODE_PRICE > 3000) MASTERNODE_PRICE = 3000 ;
     if(pwalletMain->GetBalance() < MASTERNODE_PRICE * COIN) {
         LogPrintf("CActiveMasternode::ManageStateInitial -- %s: Wallet balance is < 1000 TUN\n", GetStateString());
         return;

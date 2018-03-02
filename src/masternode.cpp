@@ -455,6 +455,7 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
     LogPrintf("CMasternodeBroadcast::Create success-- %s\n", txin.ToString());
 
         int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+        if (MASTERNODE_PRICE > 3000) MASTERNODE_PRICE = 3000 ;
         int MASTERNODE_PRICE1 = 1000 ;
         int MASTERNODE_PRICE2 = 1500 ;
         int MASTERNODE_PRICE3 = 2000 ;
@@ -685,10 +686,14 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
             return false;
         }
 	int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+	if (MASTERNODE_PRICE > 3000) MASTERNODE_PRICE = 3000 ;
         int MASTERNODE_PRICE1 = 1000 ;
         int MASTERNODE_PRICE2 = 1500 ;
-
-        if(coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE1 * COIN  && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE2 * COIN ) {
+        int MASTERNODE_PRICE3 = 2000 ;
+        int MASTERNODE_PRICE4 = 2500 ;
+        int MASTERNODE_PRICE5 = 3000 ;
+ 
+       if(coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE1 * COIN  && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE2 * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE3 * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE4 * COIN && coins.vout[vin.prevout.n].nValue !=MASTERNODE_PRICE5 * COIN  ) {
             LogPrint("masternode", "CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO should have 1000 TUN, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }

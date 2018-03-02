@@ -100,6 +100,7 @@ UniValue getinfo(const UniValue& params, bool fHelp)
     obj.push_back(Pair("blocks",        (int)chainActive.Height()));
     
     int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500;
+    if (MASTERNODE_PRICE > 3000) MASTERNODE_PRICE = 3000 ;
     obj.push_back(Pair("masternode price", MASTERNODE_PRICE));
     obj.push_back(Pair("timeoffset",    GetTimeOffset()));
     obj.push_back(Pair("connections",   (int)vNodes.size()));

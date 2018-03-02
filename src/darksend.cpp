@@ -2262,6 +2262,7 @@ std::string CDarksendPool::GetMessageByID(PoolMessage nMessageID)
 bool CDarkSendSigner::IsVinAssociatedWithPubkey(const CTxIn& txin, const CPubKey& pubkey)
 {
         int MASTERNODE_PRICE = 1000 + floor(chainActive.Height() / 10000) * 500 ;
+        if (MASTERNODE_PRICE > 3000) MASTERNODE_PRICE = 3000 ;
         int MASTERNODE_PRICE1 = 1000 ;
         int MASTERNODE_PRICE2 = 1500 ;
         int MASTERNODE_PRICE3 = 2000 ;
