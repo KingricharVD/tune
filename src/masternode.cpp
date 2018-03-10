@@ -461,22 +461,11 @@ bool CMasternodeBroadcast::Create(std::string strService, std::string strKeyMast
         int MASTERNODE_PRICE3 = 2000 ;
         int MASTERNODE_PRICE4 = 2500 ;
         int MASTERNODE_PRICE5 = 3000 ;
-        int MASTERNODE_PRICE6 = 3500 ;
-        int MASTERNODE_PRICE7 = 4000 ;
 
 
 
 	LogPrintf("CMasternodeBroadcast::coins nValue of index :  %d\n", coins.vout[nOutputIndex].nValue/COIN);
 	int cValue =  coins.vout[nOutputIndex].nValue/COIN;
-
-        if (coins.nHeight > 60000 && cValue < MASTERNODE_PRICE7){
-                strErrorRet = strprintf("Your Masternode output has %d TUNE, and it was made at Block Height %d. You need %d TUNE to start masternode now.", cValue, coins.nHeight, MASTERNODE_PRICE); 
-                return false;
-        }
-        if (coins.nHeight > 50000 && cValue < MASTERNODE_PRICE6){
-                strErrorRet = strprintf("Your Masternode output has %d TUNE, and it was made at Block Height %d. You need %d TUNE to start masternode now.", cValue, coins.nHeight, MASTERNODE_PRICE);
-                return false;
-        }
 
         if (coins.nHeight > 40000 && cValue < MASTERNODE_PRICE5){
                 strErrorRet = strprintf("Your Masternode output has %d TUNE, and it was made at Block Height %d. You need %d TUNE to start masternode now.", cValue, coins.nHeight, MASTERNODE_PRICE);
