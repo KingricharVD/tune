@@ -1,4 +1,9 @@
 #!/bin/sh
+
+if [ ! -d "src/config" ]; then
+  mkdir "src/config"
+fi
+
 set -e
 srcdir="$(dirname $0)"
 cd "$srcdir"
